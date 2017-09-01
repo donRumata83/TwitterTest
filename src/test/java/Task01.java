@@ -18,7 +18,8 @@ public class Task01 {
     private static final String TWEET = "Hello world!";
     private ChromeDriver driver;
     private WebDriverWait wait;
-    private static String CSS_DRAWER = "span.message-text";
+    private static final By CSS_DRAWER = By.cssSelector("span.message-text");
+    private static final String expectedMessage = "Ви вже надіслали цей твіт.";
 
     @BeforeClass
     public static void begin() {
@@ -35,8 +36,9 @@ public class Task01 {
         tweet(driver);
         Thread.sleep(TIMEOUT);
         tweet(driver);
+        String actualMessage = driver.findElement(CSS_DRAWER).getText();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("message-drawer"))));
-        assertEquals(driver.findElement(By.cssSelector(CSS_DRAWER)).getText(), "Ви вже надіслали цей твіт.");
+        assertEquals(actualMessage, expectedMessage);
         driver.quit();
 
     }
