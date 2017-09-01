@@ -14,7 +14,7 @@ public class Task01 {
     private static final String URL = "http://www.twitter.com";
     private static final int TIMEOUT = 10000;
     private static final String USER_NAME = "rokachov@gmail.com";
-    private static final String USER_PASS = "";
+    private static final String USER_PASS = "Rumata3330592";
     private static final String TWEET = "Hello world!";
     private ChromeDriver driver;
     private WebDriverWait wait;
@@ -36,8 +36,9 @@ public class Task01 {
         tweet(driver);
         Thread.sleep(TIMEOUT);
         tweet(driver);
-        String actualMessage = driver.findElement(CSS_DRAWER).getText();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("message-drawer"))));
+        String actualMessage = driver.findElement(CSS_DRAWER).getText();
+
         assertEquals(actualMessage, expectedMessage);
         driver.quit();
 
