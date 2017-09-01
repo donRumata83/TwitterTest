@@ -8,9 +8,10 @@ import static org.junit.Assert.*;
 
 public class Task01 {
     private static final String URL = "http://www.twitter.com";
-    private static final int TIMEOUT = 100000;
+    private static final int TIMEOUT = 10000;
     private static final String USER_NAME = "rokachov@gmail.com";
     private static final String USER_PASS = "Rumata3330592";
+    private static final String TWEET = "Hello world!";
 
     @BeforeClass
     public static void begin() {
@@ -25,7 +26,9 @@ public class Task01 {
         driver.findElement(By.id("signin-password")).sendKeys(USER_PASS);
         driver.findElement(By.className("flex-table-secondary")).click();
         Thread.sleep(TIMEOUT);
-
+        driver.findElement(By.name("tweet")).sendKeys(TWEET);
+        driver.findElement(By.cssSelector("button.tweet-action.EdgeButton.EdgeButton--primary.js-tweet-btn")).click();
+        Thread.sleep(TIMEOUT);
 
         driver.quit();
 
