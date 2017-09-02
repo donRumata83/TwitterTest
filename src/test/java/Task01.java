@@ -14,10 +14,10 @@ public class Task01 {
     private static final String URL = "http://www.twitter.com";
     private static final int TIMEOUT = 10000;
     private static final String USER_NAME = "rokachov@gmail.com";
-    private static final String USER_PASS = "Rumata3330592";
+    private static final String USER_PASS = "";
     private static final String TWEET = "Hello world!";
-    private ChromeDriver driver;
-    private WebDriverWait wait;
+    private static ChromeDriver driver;
+    private static WebDriverWait wait;
     private static final By CSS_DRAWER = By.cssSelector("span.message-text");
     private static final String expectedMessage = "Ви вже надіслали цей твіт.";
 
@@ -26,22 +26,33 @@ public class Task01 {
         ChromeDriverManager.getInstance().setup();
     }
 
-    @Test
-    public void twitterDoubleTweetCheck() throws InterruptedException {
+    @Before
+    public void beforeTest() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void twitterDoubleTweetCheck() throws InterruptedException {
+
         driver.get(URL);
         login(driver);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("global-nav-home"))));
         tweet(driver);
-        Thread.sleep(TIMEOUT);
+
         tweet(driver);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("message-drawer"))));
         String actualMessage = driver.findElement(CSS_DRAWER).getText();
 
         assertEquals(actualMessage, expectedMessage);
-        driver.quit();
 
+
+    }
+
+    @AfterClass
+    public static void end() {
+        driver.quit();
     }
 
     private void tweet(WebDriver driver) {
