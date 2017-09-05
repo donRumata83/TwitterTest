@@ -10,6 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
+
+;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
 public class Task01 {
@@ -59,11 +65,11 @@ public class Task01 {
 
     @Test
     public void deleteFirstTweet() {
-        String textFromFirstTweet = getFirstTweetText();
-        System.out.println(textFromFirstTweet);
+        String textBeforeDelete = getFirstTweetText();
+        System.out.println(textBeforeDelete);
         deleteTweet(driver);
         String actualFirstTweetText = getFirstTweetText();
-        assertTrue(!textFromFirstTweet.equals(actualFirstTweetText));
+        assertThat(textBeforeDelete, is(not(equalTo(actualFirstTweetText))));
     }
 
     @AfterClass
