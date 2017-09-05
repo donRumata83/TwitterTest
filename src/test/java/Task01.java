@@ -62,7 +62,7 @@ public class Task01 {
         String textFromFirstTweet = getFirstTweetText();
         System.out.println(textFromFirstTweet);
         deleteTweet(driver);
-        String actualFirstTweetText = getAllTweets(driver, URL, USER_NAME).get(0).findElement(By.cssSelector("div.js-tweet-text-container")).getText();
+        String actualFirstTweetText = getFirstTweetText();
         assertTrue(!textFromFirstTweet.equals(actualFirstTweetText));
     }
 
