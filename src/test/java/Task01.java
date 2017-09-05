@@ -27,14 +27,16 @@ public class Task01 {
     @BeforeClass
     public static void begin() {
         ChromeDriverManager.getInstance().setup();
+        driver = new ChromeDriver();
+        login(URL, USER_LOGIN, USER_PASS);
     }
 
     @Before
     public void beforeTest() {
-        driver = new ChromeDriver();
+
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        login(URL, USER_LOGIN, USER_PASS);
+
     }
 
     @Test
@@ -46,7 +48,7 @@ public class Task01 {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("message-drawer"))));
         String actualMessage = driver.findElement(CSS_DRAWER).getText();
 
-        assertEquals(actualMessage, expectedMessage);
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
@@ -57,7 +59,6 @@ public class Task01 {
 
     @Test
     public void deleteFirstTweet() {
-
         String textfromFirstTweet = getFirstTweetText();
         deleteTweet(driver);
         assertTrue(!textfromFirstTweet.equals(TWEET));
@@ -73,7 +74,7 @@ public class Task01 {
         driver.findElement(By.cssSelector("button.tweet-action.EdgeButton.EdgeButton--primary.js-tweet-btn")).click();
     }
 
-    private void login(String URL, String userName, String pass) {
+    private static void login(String URL, String userName, String pass) {
         driver.get(URL);
         driver.findElement(By.id("signin-email")).sendKeys(userName);
         driver.findElement(By.id("signin-password")).sendKeys(pass);
@@ -99,8 +100,8 @@ public class Task01 {
     }
 
     private boolean isItMyOunTweet(WebElement element) {
-        String expectedUserName = element.findElement(By.cssSelector("div.js-tweet-text-container")).getText();
-        return expectedUserName.equals("/" + USER_NAME);
+        String tweetAuthor = element.findElement(By.cssSelector("div.js-tweet-text-container")).getText();
+        return tweetAuthor.equals("/" + USER_NAME);
     }
 
     private String getFirstTweetText() {
