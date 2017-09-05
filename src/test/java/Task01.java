@@ -83,13 +83,15 @@ public class Task01 {
 
     private void deleteTweet(WebDriver driver) {
         driver.get(URL + "/" + USER_NAME);
-        for (WebElement element: getAllTweets(driver, URL, USER_NAME)) {
-            if (isItMyOunTweet(element)) {
-                element.findElement(By.cssSelector("div.dropdown")).click();
+        for (WebElement element : getAllTweets(driver, URL, USER_NAME)) {
+
+            element.findElement(By.cssSelector("div.dropdown")).click();
+            if (element.findElement(By.cssSelector("li.js-actionDelete")).isEnabled()) {
                 element.findElement(By.cssSelector("li.js-actionDelete")).click();
-                driver.findElement(By.className("EdgeButton.EdgeButton--danger.delete-action")).click();
+                driver.findElement(By.cssSelector("button.EdgeButton.EdgeButton--danger.delete-action")).click();
                 break;
             }
+
         }
     }
 
@@ -99,10 +101,6 @@ public class Task01 {
         return result;
     }
 
-    private boolean isItMyOunTweet(WebElement element) {
-        String tweetAuthor = element.findElement(By.cssSelector("div.js-tweet-text-container")).getText();
-        return tweetAuthor.equals("/" + USER_NAME);
-    }
 
     private String getFirstTweetText() {
         driver.get(URL + "/" + USER_NAME);
