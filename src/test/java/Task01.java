@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,13 +34,11 @@ public class Task01 {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        login(URL, USER_LOGIN, USER_PASS);
     }
 
     @Test
     public void twitterDoubleTweetCheck() throws InterruptedException {
-
-
-        login(URL, USER_LOGIN, USER_PASS);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("global-nav-home"))));
         tweet(driver, TWEET);
         Thread.sleep(TIMEOUT);
@@ -50,15 +47,20 @@ public class Task01 {
         String actualMessage = driver.findElement(CSS_DRAWER).getText();
 
         assertEquals(actualMessage, expectedMessage);
-
-
     }
 
     @Test
     public void getAlltweetsList() {
 
-        login(URL, USER_LOGIN, USER_PASS);
-        System.out.println(getAllTweets(driver, URL, USER_NAME).size() != 0);
+        assertTrue(getAllTweets(driver, URL, USER_NAME).size() != 0);
+    }
+
+    @Test
+    public void deleteFirstTweet() {
+
+        String textfromFirstTweet = getFirstTweetText();
+        deleteTweet(driver);
+        assertTrue(!textfromFirstTweet.equals(TWEET));
     }
 
     @AfterClass
@@ -78,8 +80,16 @@ public class Task01 {
         driver.findElement(By.className("flex-table-secondary")).click();
     }
 
-    private void deleteLastTweet(WebDriver driver) {
+    private void deleteTweet(WebDriver driver) {
         driver.get(URL + "/" + USER_NAME);
+        for (WebElement element: getAllTweets(driver, URL, USER_NAME)) {
+            if (isItMyOunTweet(element)) {
+                element.findElement(By.cssSelector("div.dropdown")).click();
+                element.findElement(By.cssSelector("li.js-actionDelete")).click();
+                driver.findElement(By.className("EdgeButton.EdgeButton--danger.delete-action")).click();
+                break;
+            }
+        }
 
 
     }
@@ -88,5 +98,15 @@ public class Task01 {
         driver.get(URL + "/" + USER_NAME);
         List<WebElement> result = driver.findElements(By.cssSelector("div.tweet"));
         return result;
+    }
+
+    private boolean isItMyOunTweet(WebElement element) {
+        String expectedUserName = element.findElement(By.cssSelector("div.js-tweet-text-container")).getText();
+        return expectedUserName.equals("/" + USER_NAME);
+    }
+
+    private String getFirstTweetText() {
+        driver.get(URL + "/" + USER_NAME);
+        return driver.findElement(By.cssSelector("span.username.u-dir")).getText();
     }
 }
