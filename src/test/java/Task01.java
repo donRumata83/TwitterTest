@@ -59,9 +59,11 @@ public class Task01 {
 
     @Test
     public void deleteFirstTweet() {
-        String textfromFirstTweet = getFirstTweetText();
+        String textFromFirstTweet = getFirstTweetText();
+        System.out.println(textFromFirstTweet);
         deleteTweet(driver);
-        assertTrue(!textfromFirstTweet.equals(TWEET));
+        String actualFirstTweetText = getAllTweets(driver, URL, USER_NAME).get(0).findElement(By.cssSelector("div.js-tweet-text-container")).getText();
+        assertTrue(!textFromFirstTweet.equals(actualFirstTweetText));
     }
 
     @AfterClass
@@ -104,6 +106,8 @@ public class Task01 {
 
     private String getFirstTweetText() {
         driver.get(URL + "/" + USER_NAME);
-        return driver.findElement(By.cssSelector("span.username.u-dir")).getText();
+
+        return getAllTweets(driver, URL, USER_NAME).get(0).findElement(By.cssSelector("div.js-tweet-text-container")).getText();
+
     }
 }
