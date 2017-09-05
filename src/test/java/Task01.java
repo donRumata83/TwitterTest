@@ -90,8 +90,6 @@ public class Task01 {
                 break;
             }
         }
-
-
     }
 
     private List<WebElement> getAllTweets(WebDriver driver, String URL, String USER_NAME) {
