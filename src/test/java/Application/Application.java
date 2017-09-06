@@ -3,9 +3,8 @@ package Application;
 import Pages.LoginPage;
 import Pages.MainPage;
 import Pages.Profile;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 public class Application {
     private WebDriver driver;
@@ -20,14 +19,14 @@ public class Application {
     private String pass;
 
 
-    public Application() {
+    public Application(Browser browser) {
         this.url = "http://www.twitter.com";
         this.user = "donrumatadon";
         this.login = "rokachov@gmail.com";
         this.pass = "";
 
-        ChromeDriverManager.getInstance().setup();
-        this.driver = new ChromeDriver();
+
+        this.driver = new DriverFactory().getWebDriver(browser);
 
         this.loginPage = new LoginPage(driver, url);
         this.mainPage = new MainPage(driver, url);
