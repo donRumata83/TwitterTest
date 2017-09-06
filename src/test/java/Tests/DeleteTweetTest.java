@@ -1,5 +1,6 @@
 package Tests;
 
+import Application.Browser;
 import org.junit.Test;
 ;
 
@@ -12,6 +13,7 @@ public class DeleteTweetTest extends TestBase {
 
     @Test
     public void deleteTweet() {
+        app.setBrowser(Browser.CHROME);
         app.login();
         String before = app.getLastTweetText();
         app.deleteTweet();

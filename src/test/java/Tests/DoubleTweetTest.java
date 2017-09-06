@@ -1,5 +1,6 @@
 package Tests;
 
+import Application.Browser;
 import org.junit.Test;
 import org.junit.*;
 
@@ -11,6 +12,7 @@ public class DoubleTweetTest extends TestBase {
 
     @Test
     public void doubleTweetTest() throws Exception{
+        app.setBrowser(Browser.CHROME);
         app.login();
         app.addTweet("test");
         Thread.sleep(1000);
