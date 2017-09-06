@@ -28,7 +28,7 @@ public class Profile extends Page {
         driver.get(URL + "/" + USERNAME);
     }
 
-    public void deleteTweet () {
+    public void deleteTweet() {
         for (WebElement element : getListOfTweets()) {
             element.findElement(By.cssSelector("div.dropdown")).click();
             if (element.findElement(By.cssSelector("li.js-actionDelete")).isEnabled()) {

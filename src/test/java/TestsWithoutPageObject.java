@@ -18,7 +18,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
-public class Task01 {
+public class TestsWithoutPageObject {
     private static final String URL = "http://www.twitter.com";
     private static final String USER_NAME = "donrumatadon";
     private static final int TIMEOUT = 10000;
