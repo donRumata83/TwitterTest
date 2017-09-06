@@ -61,4 +61,6 @@ public class Application {
         profilePage.open();
         return profilePage.getTextFromFirstTweet();
     }
+
+
 }

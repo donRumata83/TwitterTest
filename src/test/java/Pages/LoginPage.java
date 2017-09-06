@@ -12,7 +12,6 @@ public class LoginPage extends Page {
 
     public LoginPage(WebDriver driver, String url) {
         super(driver);
-        PageFactory.initElements(driver, this);
         this.url = url;
     }
 

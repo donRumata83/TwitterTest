@@ -9,7 +9,6 @@ public class MainPage extends Page {
 
     public MainPage(WebDriver driver, String url) {
         super(driver);
-
         this.url = url;
     }
 
