@@ -23,7 +23,7 @@ public class Application {
         this.url = "http://www.twitter.com";
         this.user = "donrumatadon";
         this.login = "rokachov@gmail.com";
-        this.pass = "Rumata3330592";
+        this.pass = "";
     }
 
     public void setBrowser(Browser browser) {
