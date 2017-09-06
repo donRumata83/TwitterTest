@@ -23,18 +23,14 @@ public class Application {
         this.url = "http://www.twitter.com";
         this.user = "donrumatadon";
         this.login = "rokachov@gmail.com";
-        this.pass = "";
-
-
-
-
-        this.loginPage = new LoginPage(driver, url);
-        this.mainPage = new MainPage(driver, url);
-        this.profilePage = new Profile(driver, url, user);
+        this.pass = "Rumata3330592";
     }
 
     public void setBrowser(Browser browser) {
-        this.driver = new DriverFactory().getWebDriver(browser);;
+        this.driver = new DriverFactory().getWebDriver(browser);
+        this.loginPage = new LoginPage(driver, url);
+        this.mainPage = new MainPage(driver, url);
+        this.profilePage = new Profile(driver, url, user);
     }
 
     public void login() {
