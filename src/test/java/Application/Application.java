@@ -14,29 +14,29 @@ public class Application {
     private MainPage mainPage;
     private Profile profilePage;
 
-    private String URL;
-    private String USER;
-    private String LOGIN;
-    private String PASS;
+    private String url;
+    private String user;
+    private String login;
+    private String pass;
 
 
     public Application() {
-        this.URL = "http://www.twitter.com";
-        this.USER = "donrumatadon";
-        this.LOGIN = "rokachov@gmail.com";
-        this.PASS = "";
+        this.url = "http://www.twitter.com";
+        this.user = "donrumatadon";
+        this.login = "rokachov@gmail.com";
+        this.pass = "";
 
         ChromeDriverManager.getInstance().setup();
         this.driver = new ChromeDriver();
 
-        this.loginPage = new LoginPage(driver, URL);
-        this.mainPage = new MainPage(driver, URL);
-        this.profilePage = new Profile(driver,URL, USER);
+        this.loginPage = new LoginPage(driver, url);
+        this.mainPage = new MainPage(driver, url);
+        this.profilePage = new Profile(driver, url, user);
     }
 
     public void login() {
         loginPage.open();
-        loginPage.login(LOGIN, PASS);
+        loginPage.login(login, pass);
     }
 
     public void addTweet(String text) {

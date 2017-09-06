@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends Page {
-    private String URL;
+    private String url;
 
-    public MainPage(WebDriver driver, String URL) {
+    public MainPage(WebDriver driver, String url) {
         super(driver);
 
-        this.URL = URL;
+        this.url = url;
     }
 
     public void tweet(String text) {
@@ -19,7 +19,7 @@ public class MainPage extends Page {
     }
 
     public void open() {
-        driver.get(URL);
+        driver.get(url);
     }
 
     public String getTextFromDrawer() {

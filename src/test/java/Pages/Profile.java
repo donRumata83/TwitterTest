@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class Profile extends Page {
-    private String URL;
-    private String USERNAME;
+    private String url;
+    private String username;
 
-    public Profile(WebDriver driver, String URL, String USERNAME) {
+    public Profile(WebDriver driver, String url, String username) {
         super(driver);
-        this.URL = URL;
-        this.USERNAME = USERNAME;
+        this.url = url;
+        this.username = username;
     }
 
     private List<WebElement> getListOfTweets() {
@@ -25,7 +25,7 @@ public class Profile extends Page {
     }
 
     public void open() {
-        driver.get(URL + "/" + USERNAME);
+        driver.get(url + "/" + username);
     }
 
     public void deleteTweet() {
